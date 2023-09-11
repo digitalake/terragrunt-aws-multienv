@@ -12,7 +12,7 @@ inputs = {
   load_balancer_type = "application"
   vpc_id             = dependency.vpc.outputs.vpc_id
   subnets            = dependency.vpc.outputs.public_subnets
-  
+
   tags = {
     Terraform   = "true"
     Environment = "${local.env_name}"

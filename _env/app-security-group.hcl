@@ -1,6 +1,6 @@
 locals {
   env_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
-  env_name = local.env_vars.locals.env   
+  env_name = local.env_vars.locals.env
 }
 
 
@@ -12,6 +12,12 @@ dependency "alb" {
   config_path = "../alb"
 }
 
+dependency "bastion-security-group" {
+  config_path = "../bastion-security-group"
+}
+
+
+
 inputs = {
   name        = "app-sg-${local.env_name}"
   description = "Security group for the app ASG instances"
@@ -21,6 +27,10 @@ inputs = {
     {
       rule                     = "http-80-tcp"
       source_security_group_id = dependency.alb.outputs.security_group_id
+    },
+    {
+      rule                     = "ssh-tcp"
+      source_security_group_id = dependency.bastion-security-group.outputs.security_group_id
     }
   ]
 

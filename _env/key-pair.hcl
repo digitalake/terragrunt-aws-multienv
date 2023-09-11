@@ -3,15 +3,13 @@ locals {
   env_name = local.env_vars.locals.env
 }
 
+
 inputs = {
 
-  name = "main-vpc-${local.env_name}"
-
-  enable_nat_gateway = true
+  key_name = "ssh-${local.env_name}"
 
   tags = {
     Terraform   = "true"
     Environment = "${local.env_name}"
   }
-
 }

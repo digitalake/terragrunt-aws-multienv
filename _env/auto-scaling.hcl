@@ -15,8 +15,12 @@ dependency "alb" {
   config_path = "../alb"
 }
 
+dependency "key-pair" {
+  config_path = "../key-pair"
+}
+
 inputs = {
-  name = "application-instance-${local.env_name}"
+  name                = "application-instance-${local.env_name}"
   health_check_type   = "EC2"
   vpc_zone_identifier = dependency.vpc.outputs.private_subnets
   target_group_arns   = dependency.alb.outputs.target_group_arns
@@ -27,6 +31,7 @@ inputs = {
 
   launch_template_name        = "application"
   launch_template_description = "Complete launch template with Docker"
+  key_name                    = dependency.key-pair.outputs.key_pair_name
   security_groups             = [dependency.app-security-group.outputs.security_group_id]
   tags = {
     Terraform   = "true"
