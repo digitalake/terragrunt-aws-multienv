@@ -20,8 +20,8 @@ EOT
 inputs = {
 
   min_size         = 1
-  max_size         = 2
-  desired_capacity = 1
+  max_size         = 4
+  desired_capacity = 3
 
   image_id      = "ami-08b65a28b856b858d"
   instance_type = "t2.micro"

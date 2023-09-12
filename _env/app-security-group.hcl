@@ -23,24 +23,6 @@ inputs = {
   description = "Security group for the app ASG instances"
   vpc_id      = dependency.vpc.outputs.vpc_id
 
-  ingress_with_source_security_group_id = [
-    {
-      rule                     = "http-80-tcp"
-      source_security_group_id = dependency.alb.outputs.security_group_id
-    },
-    {
-      rule                     = "ssh-tcp"
-      source_security_group_id = dependency.bastion-security-group.outputs.security_group_id
-    }
-  ]
-
-  egress_with_cidr_blocks = [
-    {
-      rule        = "all-all"
-      cidr_blocks = "0.0.0.0/0"
-    }
-  ]
-
   tags = {
     Terraform   = "true"
     Environment = "${local.env_name}"

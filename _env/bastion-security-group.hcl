@@ -12,20 +12,6 @@ inputs = {
   description = "Security group for the Bastion instance"
   vpc_id      = dependency.vpc.outputs.vpc_id
 
-  ingress_with_cidr_blocks = [
-    {
-      rule        = "ssh-tcp"
-      cidr_blocks = "0.0.0.0/0"
-    }
-  ]
-
-  egress_with_cidr_blocks = [
-    {
-      rule        = "all-all"
-      cidr_blocks = "0.0.0.0/0"
-    }
-  ]
-
   tags = {
     Terraform   = "true"
     Environment = "${local.env_name}"
